@@ -40,6 +40,6 @@ This guide outlines the installation of the ISPmanager hosting control panel on 
 ---
 
 ## 📝 Full Detailed Guide
-👉 https://ketulsysadmin.wordpress.com/how-to-install-ispmanager-hosting-control-panel-on-ubuntu-os/
+👉 [Install ISPmanager on Ubuntu (Complete Guide)](https://ketulsysadmin.wordpress.com/how-to-install-ispmanager-hosting-control-panel-on-ubuntu-os/)
 
 ---
