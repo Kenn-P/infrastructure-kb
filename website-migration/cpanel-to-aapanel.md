@@ -31,6 +31,5 @@ This guide explains the migration of a website from cPanel to aaPanel, including
 ---
 
 ## 📝 Full Detailed Guide
-👉 https://ketulsysadmin.wordpress.com/how-to-migrate-a-website-from-cpanel-to-aapanel-hosting-panel/
-
+👉 [Migrate Website from cPanel to aaPanel (Step-by-Step Guide)](https://ketulsysadmin.wordpress.com/how-to-migrate-a-website-from-cpanel-to-aapanel-hosting-panel/)
 ---
