@@ -31,6 +31,6 @@ This guide covers the migration of a website from cPanel to ISPmanager.
 ---
 
 ## 📝 Full Detailed Guide
-👉 https://ketulsysadmin.wordpress.com/how-to-migrate-a-website-from-cpanel-to-ispmanager-hosting-panel/
+👉 [Migrate Website from cPanel to ISPmanager (Step-by-Step Guide)](https://ketulsysadmin.wordpress.com/how-to-migrate-a-website-from-cpanel-to-ispmanager-hosting-panel/)
 
 ---
