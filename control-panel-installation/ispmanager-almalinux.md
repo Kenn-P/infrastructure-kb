@@ -39,6 +39,6 @@ This guide covers the installation of ISPmanager on an AlmaLinux server environm
 ---
 
 ## 📝 Full Detailed Guide
-👉 https://ketulsysadmin.wordpress.com/how-to-install-ispmanager-hosting-control-panel-on-almalinux/
+👉 [Install ISPmanager on AlmaLinux (Complete Guide)](https://ketulsysadmin.wordpress.com/how-to-install-ispmanager-hosting-control-panel-on-almalinux/)
 
 ---
