@@ -29,4 +29,4 @@ This guide covers the configuration of essential hosting components including we
 ---
 
 ## 📝 Full Detailed Guide
-👉 https://ketulsysadmin.wordpress.com/how-to-configure-web-server-database-server-and-ftp-server-in-ispmanager-hosting-control-panel/
+👉 [Configure Web, Database & FTP in ISPmanager (Complete Guide)](https://ketulsysadmin.wordpress.com/how-to-configure-web-server-database-server-and-ftp-server-in-ispmanager-hosting-control-panel/)
