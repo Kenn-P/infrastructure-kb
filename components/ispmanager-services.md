@@ -1,3 +1,4 @@
+{% include analytics.html %}
 # Configure Web Server, Database Server, and FTP Server in ISPmanager
 
 ## 📌 Overview
