@@ -1,4 +1,6 @@
-
+---
+layout: default
+---
 # 🐧 Linux Basics & Commands
 
 This section covers essential Linux commands used in daily system administration and troubleshooting.
