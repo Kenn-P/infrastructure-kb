@@ -1,6 +1,5 @@
 ---
 layout: default
-title: "Linux Basics & Commands"
 ---
 # 🐧 Linux Basics & Commands
 
