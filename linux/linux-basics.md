@@ -1,4 +1,7 @@
-{% include analytics.html %}
+---
+layout: default
+title: "Linux Basics & Commands"
+---
 # 🐧 Linux Basics & Commands
 
 This section covers essential Linux commands used in daily system administration and troubleshooting.
