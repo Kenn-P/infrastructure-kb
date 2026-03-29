@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # Install ISPmanager on Ubuntu
 
 ## 📌 Overview
@@ -36,10 +39,6 @@ This guide outlines the installation of the ISPmanager hosting control panel on 
 - Ensure required ports are accessible
 - Verify system resources before installation
 - Check network and DNS configuration if panel is not accessible
-
----
-layout: default
----
 ---
 
 ## 📝 Full Detailed Guide
