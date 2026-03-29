@@ -32,3 +32,7 @@ layout: default
 
 ## 📝 Full Detailed Guide
 👉 [Configure Web, Database & FTP in ISPmanager (Complete Guide)](https://ketulsysadmin.wordpress.com/how-to-configure-web-server-database-server-and-ftp-server-in-ispmanager-hosting-control-panel/)
+
+---
+layout: default
+---
