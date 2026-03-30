@@ -9,14 +9,85 @@
   {% include analytics.html %}
 
   <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; color:#333;}
-    header { background:#0e75b6; color:white; padding:2rem; text-align:center;}
-    header h1 { margin:0;}
-    section { max-width:900px; margin:2rem auto; padding:2rem; background:white; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
-    h2 { color:#0e75b6; margin-top:2rem;}
-    a.button { display:inline-block; margin:0.5rem 0.5rem 0 0; padding:0.5rem 1rem; background:#0e75b6; color:white; text-decoration:none; border-radius:5px; transition:0.2s;}
-    a.button:hover { background:#095494;}
-  </style>
+  body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; color:#333;}
+
+  header { background:#0e75b6; color:white; padding:2rem; text-align:center;}
+  header h1 { margin:0;}
+
+  section {
+    max-width:900px;
+    margin:2rem auto;
+    padding:2rem;
+    background:white;
+    border-radius:8px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  h1, h2, h3 {
+    color:#0e75b6;
+    margin-top:1.5rem;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background: #0e75b6;
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background: #f9f9f9;
+  }
+
+  code {
+    background: #eee;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  hr {
+    margin: 2rem 0;
+  }
+
+  a {
+    color: #0e75b6;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  a.button {
+    display:inline-block;
+    margin:0.5rem 0.5rem 0 0;
+    padding:0.5rem 1rem;
+    background:#0e75b6;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+    transition:0.2s;
+  }
+
+  a.button:hover {
+    background:#095494;
+  }
+</style>
 </head>
 <body>
 
