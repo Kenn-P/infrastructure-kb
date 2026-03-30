@@ -1,6 +1,5 @@
 ---
 layout: default
-title: "Infrastructure Knowledge Base"
 ---
 # 📚 Infrastructure Knowledge Base
 
