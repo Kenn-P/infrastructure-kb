@@ -141,6 +141,49 @@ a.button {
 a.button:hover {
   background:#095494;
 }
+
+  /* 📱 Mobile Responsive Fix */
+@media (max-width: 768px) {
+
+  /* Stack layout instead of side-by-side */
+  body {
+    display:block;
+  }
+
+  /* Hide sidebar on mobile */
+  .sidebar {
+    display:none;
+  }
+
+  /* Remove left margin */
+  .main {
+    margin-left:0;
+  }
+
+  /* Header */
+  header {
+    padding:1rem;
+  }
+
+  header h1 {
+    font-size:20px;
+  }
+
+  /* Content spacing */
+  section {
+    margin:1rem;
+    padding:1rem;
+  }
+
+  /* Tables scroll horizontally */
+  table {
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+
+}
+  
 </style>
 
 </head>
