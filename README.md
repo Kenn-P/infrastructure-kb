@@ -43,5 +43,12 @@ This repository serves as a structured knowledge base of real-world system admin
 
 ---
 
+## 🚀 DevOps Projects
+
+* 📖 [CI/CD Pipeline — Full Tutorial](https://ketulpa.github.io/infrastructure-kb/devops-project/devops-tutorial.html)
+* 📋 [Project Overview](https://ketulpa.github.io/infrastructure-kb/devops-project/overview.html)
+
+---
+
 ## 📌 Note
 This knowledge base is continuously updated with practical scenarios and configurations.
