@@ -1,1 +1,1199 @@
+---
+layout: default
+---
 
+<style>
+  /* ── Reset & base ────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .doc-wrap {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #e2e8f0;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 0 80px 0;
+  }
+
+  /* ── Hero ────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-radius: 12px;
+    padding: 40px 36px 32px;
+    margin-bottom: 36px;
+    border: 1px solid #334155;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px; height: 100%;
+    background: linear-gradient(180deg, #0d9488, #2dd4bf);
+    border-radius: 12px 0 0 12px;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0d9488;
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #f8fafc;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: #2dd4bf; }
+  .hero-desc {
+    font-size: 1rem;
+    color: #94a3b8;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    max-width: 680px;
+  }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+  .badge-teal   { background: #0d9488; color: #fff; border-color: #0d9488; }
+  .badge-purple { background: #6366f1; color: #fff; border-color: #6366f1; }
+  .badge-orange { background: #f59e0b; color: #fff; border-color: #f59e0b; }
+  .badge-blue   { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+  .badge-green  { background: #22c55e; color: #fff; border-color: #22c55e; }
+
+  .infra-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .infra-card {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .infra-card .ic-title { font-size: 13px; font-weight: 700; color: #2dd4bf; margin-bottom: 4px; }
+  .infra-card .ic-os { font-size: 11px; color: #64748b; font-family: monospace; background: #1e293b; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
+  .infra-card ul { list-style: none; }
+  .infra-card ul li { font-size: 12px; color: #94a3b8; padding: 2px 0; }
+  .infra-card ul li::before { content: '›'; color: #0d9488; margin-right: 6px; }
+
+  /* ── Table of contents ───────────────────────── */
+  .toc {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 36px;
+  }
+  .toc h2 { font-size: 13px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; }
+  .toc ol { list-style: none; counter-reset: toc-counter; }
+  .toc ol li { counter-increment: toc-counter; padding: 5px 0; border-bottom: 1px solid #0f172a; }
+  .toc ol li:last-child { border-bottom: none; }
+  .toc ol li::before { content: '0' counter(toc-counter); font-size: 11px; font-weight: 700; color: #475569; margin-right: 12px; font-family: monospace; }
+  .toc ol li a { color: #e2e8f0; text-decoration: none; font-size: 14px; font-weight: 500; }
+  .toc ol li a:hover { color: #2dd4bf; }
+  .toc ol li .toc-tag { font-size: 10px; background: #0d9488; color: #fff; padding: 1px 7px; border-radius: 10px; margin-left: 8px; font-weight: 700; }
+
+  /* ── Section / Phase ────────────────────────── */
+  .phase {
+    margin-bottom: 52px;
+    scroll-margin-top: 20px;
+  }
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #1e293b;
+  }
+  .phase-num {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .phase-num.teal   { background: #0d9488; color: #fff; }
+  .phase-num.purple { background: #6366f1; color: #fff; }
+  .phase-num.orange { background: #f59e0b; color: #fff; }
+  .phase-num.green  { background: #22c55e; color: #fff; }
+  .phase-num.red    { background: #ef4444; color: #fff; }
+
+  .phase-title { font-size: 1.4rem; font-weight: 800; color: #f8fafc; }
+  .phase-subtitle { font-size: 13px; color: #64748b; margin-top: 3px; }
+
+  /* ── Steps ───────────────────────────────────── */
+  .step {
+    margin-bottom: 28px;
+    padding-left: 20px;
+    border-left: 2px solid #1e293b;
+  }
+  .step-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #475569;
+    margin-bottom: 6px;
+  }
+  .step h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin-bottom: 8px;
+  }
+  .step p {
+    font-size: 13.5px;
+    color: #94a3b8;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  /* ── Code blocks ────────────────────────────── */
+  .code-block {
+    background: #0f172a;
+    border: 1px solid #1e3a5f;
+    border-radius: 8px;
+    margin: 12px 0;
+    overflow: hidden;
+  }
+  .code-header {
+    background: #1e293b;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #0f172a;
+  }
+  .code-header span {
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748b;
+    font-family: monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .code-header .copy-hint { font-size: 10px; color: #334155; }
+  pre {
+    padding: 18px 20px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #e2e8f0;
+  }
+  pre .comment { color: #475569; }
+  pre .cmd     { color: #2dd4bf; }
+  pre .key     { color: #7dd3fc; }
+  pre .val     { color: #86efac; }
+  pre .string  { color: #fbbf24; }
+
+  /* ── Output block ───────────────────────────── */
+  .output-block {
+    background: #0a1a0a;
+    border: 1px solid #166534;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 10px 0;
+    font-family: monospace;
+    font-size: 12.5px;
+    color: #4ade80;
+    line-height: 1.7;
+  }
+  .output-block .out-label { font-size: 10px; color: #166534; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+
+  /* ── Info / warning / tip boxes ────────────── */
+  .callout {
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .callout-info    { background: #1e3a5f; border-left: 4px solid #3b82f6; color: #bfdbfe; }
+  .callout-warn    { background: #2d1f07; border-left: 4px solid #f59e0b; color: #fde68a; }
+  .callout-tip     { background: #0a251a; border-left: 4px solid #22c55e; color: #86efac; }
+  .callout strong  { display: block; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+
+  /* ── Phase summary tags ─────────────────────── */
+  .phase-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #1e293b;
+  }
+  .tool-tag {
+    font-size: 11px;
+    font-family: monospace;
+    background: #1e293b;
+    color: #94a3b8;
+    border: 1px solid #334155;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+
+  /* ── Inline code ────────────────────────────── */
+  code {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: monospace;
+    font-size: 12.5px;
+    color: #2dd4bf;
+  }
+
+  /* ── Section divider ────────────────────────── */
+  .section-div {
+    border: none;
+    border-top: 1px solid #1e293b;
+    margin: 48px 0;
+  }
+
+  /* ── Progress bar ───────────────────────────── */
+  .progress-bar {
+    background: #1e293b;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 36px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .prog-step {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background: #334155;
+  }
+  .prog-step.done { background: #0d9488; }
+  .prog-label { font-size: 11px; color: #475569; margin-left: 10px; white-space: nowrap; }
+
+  @media (max-width: 600px) {
+    .infra-row { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 1.5rem; }
+    pre { font-size: 11px; }
+  }
+</style>
+
+<div class="doc-wrap">
+
+<!-- ══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-eyebrow">Full DevOps Project — Step by Step Guide</div>
+  <h1>CI/CD Pipeline &<br><span>Monitoring Stack</span></h1>
+  <p class="hero-desc">
+    Build a real-world DevOps pipeline from scratch on two VPS servers. Every
+    <code>git push</code> automatically tests, builds, and deploys a containerised
+    Flask application — with Prometheus + Grafana monitoring both Linux and Windows
+    servers, and Alertmanager sending Slack and email notifications.
+  </p>
+  <div class="badge-row">
+    <span class="badge badge-teal">Docker</span>
+    <span class="badge badge-purple">GitHub Actions</span>
+    <span class="badge badge-orange">Nginx</span>
+    <span class="badge badge-orange">Prometheus</span>
+    <span class="badge badge-green">Grafana</span>
+    <span class="badge badge-teal">Alertmanager</span>
+    <span class="badge badge-blue">Python Flask</span>
+  </div>
+
+  <div class="infra-row">
+    <div class="infra-card">
+      <div class="ic-title">🐧 Linux VPS</div>
+      <span class="ic-os">Ubuntu 24.04 LTS</span>
+      <ul>
+        <li>App server — Docker + Nginx</li>
+        <li>CI/CD deploy target</li>
+        <li>Prometheus + Grafana hub</li>
+        <li>Alertmanager</li>
+      </ul>
+    </div>
+    <div class="infra-card">
+      <div class="ic-title">🪟 Windows VPS</div>
+      <span class="ic-os">Windows Server 2025</span>
+      <ul>
+        <li>Monitoring target</li>
+        <li>windows_exporter agent</li>
+        <li>Optional: self-hosted runner</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TABLE OF CONTENTS
+══════════════════════════════════════════════ -->
+<div class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#prerequisites">Prerequisites & VPS Setup</a></li>
+    <li><a href="#phase1">Phase 1 — Flask App & Docker</a> <span class="toc-tag">Phase 1</span></li>
+    <li><a href="#phase2">Phase 2 — GitHub Actions CI/CD</a> <span class="toc-tag">Phase 2</span></li>
+    <li><a href="#phase3">Phase 3 — Nginx Reverse Proxy</a> <span class="toc-tag">Phase 3</span></li>
+    <li><a href="#phase4">Phase 4 — Prometheus & Grafana</a> <span class="toc-tag">Phase 4</span></li>
+    <li><a href="#phase5">Phase 5 — Alertmanager</a> <span class="toc-tag">Phase 5</span></li>
+    <li><a href="#screenshots">Screenshots & Results</a></li>
+  </ol>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PREREQUISITES
+══════════════════════════════════════════════ -->
+<div class="phase" id="prerequisites">
+  <div class="phase-header">
+    <div class="phase-num teal">0</div>
+    <div>
+      <div class="phase-title">Prerequisites & VPS Setup</div>
+      <div class="phase-subtitle">Fresh Ubuntu 24.04 LTS — first things to run</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 1</div>
+    <h3>Update the system</h3>
+    <p>After a fresh Ubuntu install, always update and upgrade before installing anything.</p>
+    <div class="code-block">
+      <div class="code-header"><span>bash — linux vps</span></div>
+      <pre>apt update && apt upgrade -y</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 2</div>
+    <h3>Configure git</h3>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre>git config --global user.name "Your Name"
+git config --global user.email "you@gmail.com"
+git config --global init.defaultBranch main</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 3</div>
+    <h3>Set up SSH key for GitHub</h3>
+    <p>Generate an SSH key on your VPS and add the public key to your GitHub account so you can push code.</p>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre><span class="comment"># Generate the key</span>
+ssh-keygen -t ed25519 -C "you@gmail.com"
+
+<span class="comment"># Print the public key — copy this</span>
+cat ~/.ssh/id_ed25519.pub
+
+<span class="comment"># Test the connection after adding key to GitHub</span>
+ssh -T git@github.com</pre>
+    </div>
+    <div class="output-block">
+      <div class="out-label">Expected output</div>
+      Hi ketulpa! You've successfully authenticated, but GitHub does not provide shell access.
+    </div>
+    <div class="callout callout-info">
+      <strong>ℹ️ Info</strong>
+      Add the public key at: <strong>github.com → Settings → SSH and GPG keys → New SSH key</strong>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 4</div>
+    <h3>Install Docker</h3>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre>apt install -y ca-certificates curl
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+  -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+
+echo "deb [arch=$(dpkg --print-architecture) \
+  signed-by=/etc/apt/keyrings/docker.asc] \
+  https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
+  | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+apt update
+apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+<span class="comment"># Verify</span>
+docker --version
+docker run hello-world</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 5</div>
+    <h3>Create the repo on GitHub and clone it</h3>
+    <p>Create a new repo at <strong>github.com → New repository</strong>, name it <code>devops-pipeline</code>, then clone it:</p>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre>git clone git@github.com:YOURUSERNAME/devops-pipeline.git
+cd devops-pipeline
+mkdir -p app .github/workflows</pre>
+    </div>
+  </div>
+
+  <div class="phase-tools">
+    <span class="tool-tag">Ubuntu 24.04</span>
+    <span class="tool-tag">Docker</span>
+    <span class="tool-tag">Git</span>
+    <span class="tool-tag">SSH</span>
+  </div>
+</div>
+
+<hr class="section-div">
+
+<!-- ══════════════════════════════════════════════
+     PHASE 1
+══════════════════════════════════════════════ -->
+<div class="phase" id="phase1">
+  <div class="phase-header">
+    <div class="phase-num teal">1</div>
+    <div>
+      <div class="phase-title">Flask App & Docker</div>
+      <div class="phase-subtitle">Build the app, containerise it, verify it runs</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 1</div>
+    <h3>Create the Flask application</h3>
+    <div class="code-block">
+      <div class="code-header"><span>app/app.py</span></div>
+      <pre><span class="key">from</span> flask <span class="key">import</span> Flask, jsonify
+<span class="key">from</span> prometheus_flask_exporter <span class="key">import</span> PrometheusMetrics
+
+app = Flask(__name__)
+metrics = PrometheusMetrics(app)
+
+<span class="string">@app.route('/')</span>
+<span class="key">def</span> home():
+    <span class="key">return</span> jsonify({
+        <span class="string">"status"</span>: <span class="string">"running"</span>,
+        <span class="string">"message"</span>: <span class="string">"DevOps Pipeline"</span>,
+        <span class="string">"version"</span>: <span class="string">"1.0"</span>
+    })
+
+<span class="string">@app.route('/health')</span>
+<span class="key">def</span> health():
+    <span class="key">return</span> jsonify({<span class="string">"status"</span>: <span class="string">"healthy"</span>}), 200
+
+<span class="key">if</span> __name__ == <span class="string">'__main__'</span>:
+    app.run(host=<span class="string">'0.0.0.0'</span>, port=5000)</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 2</div>
+    <h3>Create requirements.txt</h3>
+    <div class="code-block">
+      <div class="code-header"><span>app/requirements.txt</span></div>
+      <pre>flask==3.0.3
+prometheus-flask-exporter==0.23.1</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 3</div>
+    <h3>Create the Dockerfile</h3>
+    <div class="code-block">
+      <div class="code-header"><span>app/Dockerfile</span></div>
+      <pre><span class="key">FROM</span> python:3.12-slim
+<span class="key">WORKDIR</span> /app
+<span class="key">COPY</span> requirements.txt .
+<span class="key">RUN</span> pip install --no-cache-dir -r requirements.txt
+<span class="key">COPY</span> app.py .
+<span class="key">EXPOSE</span> 5000
+<span class="key">CMD</span> [<span class="string">"python"</span>, <span class="string">"app.py"</span>]</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 4</div>
+    <h3>Build and run the container</h3>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre>cd ~/devops-pipeline/app
+
+<span class="comment"># Build the image</span>
+docker build -t devops-app .
+
+<span class="comment"># Run the container</span>
+docker run -d -p 5000:5000 --name devops-app devops-app
+
+<span class="comment"># Test both endpoints</span>
+curl http://localhost:5000
+curl http://localhost:5000/health
+curl http://localhost:5000/metrics</pre>
+    </div>
+    <div class="output-block">
+      <div class="out-label">Expected</div>
+      {"message":"DevOps Pipeline","status":"running","version":"1.0"}
+      {"status":"healthy"}
+      # HELP python_gc_objects_collected_total ...
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <strong>✅ Phase 1 complete</strong>
+    If all three curl commands return data, your containerised app is working. Take a screenshot for your documentation.
+  </div>
+
+  <div class="phase-tools">
+    <span class="tool-tag">Python Flask</span>
+    <span class="tool-tag">Docker</span>
+    <span class="tool-tag">prometheus-flask-exporter</span>
+    <span class="tool-tag">docker build</span>
+    <span class="tool-tag">docker run</span>
+  </div>
+</div>
+
+<hr class="section-div">
+
+<!-- ══════════════════════════════════════════════
+     PHASE 2
+══════════════════════════════════════════════ -->
+<div class="phase" id="phase2">
+  <div class="phase-header">
+    <div class="phase-num purple">2</div>
+    <div>
+      <div class="phase-title">GitHub Actions CI/CD</div>
+      <div class="phase-subtitle">Automate deploy on every git push</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 1</div>
+    <h3>Set up SSH deploy key</h3>
+    <p>Generate a dedicated keypair for GitHub Actions to SSH into your VPS:</p>
+    <div class="code-block">
+      <div class="code-header"><span>bash — linux vps</span></div>
+      <pre><span class="comment"># Generate deploy key (no passphrase)</span>
+ssh-keygen -t ed25519 -f ~/.ssh/github_actions \
+  -C "github-actions-deploy" -N ""
+
+<span class="comment"># Add public key so Actions can log in</span>
+cat ~/.ssh/github_actions.pub >> ~/.ssh/authorized_keys
+
+<span class="comment"># Print private key — copy this for GitHub Secrets</span>
+cat ~/.ssh/github_actions</pre>
+    </div>
+    <div class="callout callout-info">
+      <strong>ℹ️ GitHub Secrets</strong>
+      Go to your repo → <strong>Settings → Secrets and variables → Actions</strong> and add:<br>
+      <code>VPS_HOST</code> — your Linux VPS IP address<br>
+      <code>VPS_USER</code> — your SSH username (e.g. root)<br>
+      <code>VPS_SSH_KEY</code> — the entire private key including BEGIN/END lines
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 2</div>
+    <h3>Create the workflow file</h3>
+    <div class="code-block">
+      <div class="code-header"><span>.github/workflows/deploy.yml</span></div>
+      <pre><span class="key">name:</span> <span class="string">CI/CD Pipeline</span>
+
+<span class="key">on:</span>
+  <span class="key">push:</span>
+    <span class="key">branches:</span> <span class="val">[main]</span>
+
+<span class="key">jobs:</span>
+  <span class="key">deploy:</span>
+    <span class="key">runs-on:</span> <span class="string">ubuntu-latest</span>
+    <span class="key">steps:</span>
+      - <span class="key">name:</span> <span class="string">Checkout code</span>
+        <span class="key">uses:</span> <span class="string">actions/checkout@v4</span>
+
+      - <span class="key">name:</span> <span class="string">Build Docker image</span>
+        <span class="key">run:</span> <span class="string">docker build -t devops-app ./app</span>
+
+      - <span class="key">name:</span> <span class="string">Deploy to VPS</span>
+        <span class="key">uses:</span> <span class="string">appleboy/ssh-action@v1</span>
+        <span class="key">with:</span>
+          <span class="key">host:</span> <span class="val">${{ secrets.VPS_HOST }}</span>
+          <span class="key">username:</span> <span class="val">${{ secrets.VPS_USER }}</span>
+          <span class="key">key:</span> <span class="val">${{ secrets.VPS_SSH_KEY }}</span>
+          <span class="key">script:</span> |
+            cd ~/devops-pipeline
+            git pull origin main
+            docker stop devops-app || true
+            docker rm devops-app || true
+            docker build -t devops-app ./app
+            docker run -d -p 5000:5000 --name devops-app devops-app</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 3</div>
+    <h3>Push and verify</h3>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre>cd ~/devops-pipeline
+git add .
+git commit -m "Phase 2: Add GitHub Actions CI/CD workflow"
+git push origin main</pre>
+    </div>
+    <p>Go to <strong>github.com/YOURUSERNAME/devops-pipeline → Actions</strong> and watch the workflow run. It should show a green ✅.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 4</div>
+    <h3>Test auto-deploy</h3>
+    <p>Change the version in <code>app.py</code> from <code>"1.0"</code> to <code>"2.0"</code>, commit and push. The pipeline will auto-deploy — no manual Docker commands needed.</p>
+    <div class="output-block">
+      <div class="out-label">Before push</div>
+      {"status":"running","version":"1.0"}
+    </div>
+    <div class="output-block">
+      <div class="out-label">After push — auto deployed</div>
+      {"status":"running","version":"2.0"}
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <strong>✅ Phase 2 complete</strong>
+    Every git push now triggers: test → build → deploy. Zero manual intervention.
+  </div>
+
+  <div class="phase-tools">
+    <span class="tool-tag">GitHub Actions</span>
+    <span class="tool-tag">appleboy/ssh-action</span>
+    <span class="tool-tag">SSH keypair</span>
+    <span class="tool-tag">GitHub Secrets</span>
+  </div>
+</div>
+
+<hr class="section-div">
+
+<!-- ══════════════════════════════════════════════
+     PHASE 3
+══════════════════════════════════════════════ -->
+<div class="phase" id="phase3">
+  <div class="phase-header">
+    <div class="phase-num orange">3</div>
+    <div>
+      <div class="phase-title">Nginx Reverse Proxy</div>
+      <div class="phase-subtitle">Serve the app on port 80 via public IP</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 1</div>
+    <h3>Install Nginx</h3>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre>apt install -y nginx
+systemctl enable nginx
+systemctl start nginx</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 2</div>
+    <h3>Create the site config</h3>
+    <div class="code-block">
+      <div class="code-header"><span>/etc/nginx/sites-available/devops-app</span></div>
+      <pre><span class="key">server</span> {
+    <span class="key">listen</span> <span class="val">80</span>;
+    <span class="key">server_name</span> _;
+
+    <span class="key">location</span> / {
+        <span class="key">proxy_pass</span>         <span class="string">http://127.0.0.1:5000</span>;
+        <span class="key">proxy_set_header</span>   Host $host;
+        <span class="key">proxy_set_header</span>   X-Real-IP $remote_addr;
+        <span class="key">proxy_set_header</span>   X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 3</div>
+    <h3>Enable and reload</h3>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre><span class="comment"># Enable the site, disable default</span>
+ln -s /etc/nginx/sites-available/devops-app \
+      /etc/nginx/sites-enabled/
+rm /etc/nginx/sites-enabled/default
+
+<span class="comment"># Test config and reload</span>
+nginx -t
+systemctl reload nginx
+
+<span class="comment"># Test on port 80</span>
+curl http://localhost:80</pre>
+    </div>
+    <p>Now open <code>http://YOUR_VPS_IP</code> in a browser — your Flask app should respond on port 80.</p>
+  </div>
+
+  <div class="callout callout-tip">
+    <strong>✅ Phase 3 complete</strong>
+    App is publicly accessible on port 80. No more :5000 needed.
+  </div>
+
+  <div class="phase-tools">
+    <span class="tool-tag">Nginx</span>
+    <span class="tool-tag">proxy_pass</span>
+    <span class="tool-tag">port 80</span>
+  </div>
+</div>
+
+<hr class="section-div">
+
+<!-- ══════════════════════════════════════════════
+     PHASE 4
+══════════════════════════════════════════════ -->
+<div class="phase" id="phase4">
+  <div class="phase-header">
+    <div class="phase-num green">4</div>
+    <div>
+      <div class="phase-title">Prometheus & Grafana</div>
+      <div class="phase-subtitle">Monitor both Linux and Windows VPS servers</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 1</div>
+    <h3>Install node_exporter (Linux metrics agent)</h3>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre>cd ~
+wget https://github.com/prometheus/node_exporter/releases/download/v1.8.0/node_exporter-1.8.0.linux-amd64.tar.gz
+tar -xvf node_exporter-1.8.0.linux-amd64.tar.gz
+mv node_exporter-1.8.0.linux-amd64/node_exporter /usr/local/bin/
+rm -rf node_exporter-1.8.0.linux-amd64*
+
+<span class="comment"># Create systemd service</span>
+cat > /etc/systemd/system/node_exporter.service &lt;&lt; 'EOF'
+[Unit]
+Description=Node Exporter
+After=network.target
+[Service]
+User=root
+ExecStart=/usr/local/bin/node_exporter
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable --now node_exporter
+
+<span class="comment"># Verify</span>
+curl http://localhost:9100/metrics | head -5</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 2</div>
+    <h3>Install Prometheus</h3>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre>wget https://github.com/prometheus/prometheus/releases/download/v2.51.0/prometheus-2.51.0.linux-amd64.tar.gz
+tar -xvf prometheus-2.51.0.linux-amd64.tar.gz
+mv prometheus-2.51.0.linux-amd64/prometheus /usr/local/bin/
+mkdir -p /etc/prometheus /var/lib/prometheus
+mv prometheus-2.51.0.linux-amd64/prometheus.yml /etc/prometheus/
+rm -rf prometheus-2.51.0.linux-amd64*</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 3</div>
+    <h3>Configure Prometheus scrape targets</h3>
+    <div class="code-block">
+      <div class="code-header"><span>/etc/prometheus/prometheus.yml</span></div>
+      <pre><span class="key">global:</span>
+  <span class="key">scrape_interval:</span> <span class="val">15s</span>
+
+<span class="key">scrape_configs:</span>
+  - <span class="key">job_name:</span> <span class="string">'linux-vps'</span>
+    <span class="key">static_configs:</span>
+      - <span class="key">targets:</span> [<span class="string">'localhost:9100'</span>]
+
+  - <span class="key">job_name:</span> <span class="string">'flask-app'</span>
+    <span class="key">static_configs:</span>
+      - <span class="key">targets:</span> [<span class="string">'localhost:5000'</span>]
+
+  - <span class="key">job_name:</span> <span class="string">'windows-vps'</span>
+    <span class="key">static_configs:</span>
+      - <span class="key">targets:</span> [<span class="string">'WINDOWS_VPS_IP:9182'</span>]</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 4</div>
+    <h3>Start Prometheus</h3>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre>cat > /etc/systemd/system/prometheus.service &lt;&lt; 'EOF'
+[Unit]
+Description=Prometheus
+After=network.target
+[Service]
+User=root
+ExecStart=/usr/local/bin/prometheus \
+  --config.file=/etc/prometheus/prometheus.yml \
+  --storage.tsdb.path=/var/lib/prometheus
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable --now prometheus
+curl http://localhost:9090/-/healthy</pre>
+    </div>
+    <div class="output-block">
+      <div class="out-label">Expected</div>
+      Prometheus Server is Healthy.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 5</div>
+    <h3>Install windows_exporter on Windows VPS</h3>
+    <p>Download the <code>.msi</code> installer from the <a href="https://github.com/prometheus-community/windows_exporter/releases" style="color:#2dd4bf;">windows_exporter releases page</a> and run it on your Windows VPS. Use all default options.</p>
+    <p>Then open the Windows firewall for port 9182 (run in PowerShell as Administrator):</p>
+    <div class="code-block">
+      <div class="code-header"><span>powershell — windows vps</span></div>
+      <pre>New-NetFirewallRule -DisplayName "windows_exporter" `
+  -Direction Inbound -Protocol TCP `
+  -LocalPort 9182 -Action Allow</pre>
+    </div>
+    <p>Verify from your Linux VPS:</p>
+    <div class="code-block">
+      <div class="code-header"><span>bash — linux vps</span></div>
+      <pre>curl http://WINDOWS_VPS_IP:9182/metrics | head -5</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 6</div>
+    <h3>Install Grafana</h3>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre>apt install -y software-properties-common
+wget -q -O - https://packages.grafana.com/gpg.key | apt-key add -
+echo "deb https://packages.grafana.com/oss/deb stable main" \
+  > /etc/apt/sources.list.d/grafana.list
+apt update && apt install -y grafana
+systemctl enable --now grafana-server</pre>
+    </div>
+    <p>Access Grafana at <code>http://YOUR_VPS_IP:3000</code> — default login is <code>admin / admin</code>.</p>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 7</div>
+    <h3>Add Prometheus data source & import dashboards</h3>
+    <p><strong>Add data source:</strong> Home → Connections → Data sources → Add → Prometheus → URL: <code>http://localhost:9090</code> → Save & test</p>
+    <p><strong>Import Linux dashboard:</strong> Home → Dashboards → New → Import → enter <code>1860</code> → Load → select Prometheus → Import</p>
+    <p><strong>Import Windows dashboard:</strong> Same steps, enter <code>20763</code></p>
+  </div>
+
+  <div class="callout callout-tip">
+    <strong>✅ Phase 4 complete</strong>
+    Both servers are visible in Grafana with CPU, RAM, disk and network metrics.
+  </div>
+
+  <div class="phase-tools">
+    <span class="tool-tag">Prometheus</span>
+    <span class="tool-tag">Grafana</span>
+    <span class="tool-tag">node_exporter</span>
+    <span class="tool-tag">windows_exporter</span>
+    <span class="tool-tag">Dashboard 1860</span>
+    <span class="tool-tag">Dashboard 20763</span>
+  </div>
+</div>
+
+<hr class="section-div">
+
+<!-- ══════════════════════════════════════════════
+     PHASE 5
+══════════════════════════════════════════════ -->
+<div class="phase" id="phase5">
+  <div class="phase-header">
+    <div class="phase-num red">5</div>
+    <div>
+      <div class="phase-title">Alertmanager</div>
+      <div class="phase-subtitle">Slack alerts + email escalation after 25 minutes</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 1</div>
+    <h3>Install Alertmanager</h3>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre>cd ~
+wget https://github.com/prometheus/alertmanager/releases/download/v0.27.0/alertmanager-0.27.0.linux-amd64.tar.gz
+tar -xvf alertmanager-0.27.0.linux-amd64.tar.gz
+mv alertmanager-0.27.0.linux-amd64/alertmanager /usr/local/bin/
+mv alertmanager-0.27.0.linux-amd64/amtool /usr/local/bin/
+mkdir -p /etc/alertmanager /var/lib/alertmanager
+rm -rf alertmanager-0.27.0.linux-amd64*</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 2</div>
+    <h3>Get your Slack webhook URL</h3>
+    <p>Go to <a href="https://api.slack.com/apps" style="color:#2dd4bf;">api.slack.com/apps</a> → Create New App → Incoming Webhooks → Add New Webhook → pick channel → copy the URL.</p>
+    <div class="callout callout-warn">
+      <strong>⚠️ Security</strong>
+      Never commit your webhook URL or passwords to GitHub. Use placeholder values in config files you version control.
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 3</div>
+    <h3>Configure Alertmanager</h3>
+    <div class="code-block">
+      <div class="code-header"><span>/etc/alertmanager/alertmanager.yml</span></div>
+      <pre><span class="key">global:</span>
+  <span class="key">resolve_timeout:</span> <span class="val">5m</span>
+  <span class="key">smtp_smarthost:</span> <span class="string">'smtp.gmail.com:587'</span>
+  <span class="key">smtp_from:</span> <span class="string">'you@gmail.com'</span>
+  <span class="key">smtp_auth_username:</span> <span class="string">'you@gmail.com'</span>
+  <span class="key">smtp_auth_password:</span> <span class="string">'YOUR_GMAIL_APP_PASSWORD'</span>
+  <span class="key">smtp_require_tls:</span> <span class="val">true</span>
+
+<span class="key">route:</span>
+  <span class="key">group_by:</span> [<span class="string">'alertname'</span>, <span class="string">'instance'</span>]
+  <span class="key">group_wait:</span> <span class="val">30s</span>
+  <span class="key">group_interval:</span> <span class="val">5m</span>
+  <span class="key">repeat_interval:</span> <span class="val">5m</span>
+  <span class="key">receiver:</span> <span class="string">'slack-alerts'</span>
+  <span class="key">routes:</span>
+    - <span class="key">match:</span>
+        <span class="key">severity:</span> <span class="val">critical</span>
+      <span class="key">receiver:</span> <span class="string">'slack-alerts'</span>
+      <span class="key">repeat_interval:</span> <span class="val">5m</span>
+      <span class="key">continue:</span> <span class="val">true</span>
+    - <span class="key">match:</span>
+        <span class="key">severity:</span> <span class="val">critical</span>
+      <span class="key">receiver:</span> <span class="string">'email-escalation'</span>
+      <span class="key">repeat_interval:</span> <span class="val">25m</span>
+
+<span class="key">receivers:</span>
+  - <span class="key">name:</span> <span class="string">'slack-alerts'</span>
+    <span class="key">slack_configs:</span>
+      - <span class="key">api_url:</span> <span class="string">'YOUR_SLACK_WEBHOOK_URL'</span>
+        <span class="key">channel:</span> <span class="string">'#alerts'</span>
+        <span class="key">send_resolved:</span> <span class="val">true</span>
+        <span class="key">title:</span> <span class="string">'{{ if eq .Status "firing" }}🔴 ALERT{{ else }}✅ RESOLVED{{ end }}: {{ .CommonLabels.alertname }}'</span>
+        <span class="key">text:</span> <span class="string">'*Server:* {{ .CommonLabels.instance }}\n*Issue:* {{ .CommonAnnotations.summary }}'</span>
+
+  - <span class="key">name:</span> <span class="string">'email-escalation'</span>
+    <span class="key">slack_configs:</span>
+      - <span class="key">api_url:</span> <span class="string">'YOUR_SLACK_WEBHOOK_URL'</span>
+        <span class="key">channel:</span> <span class="string">'#alerts'</span>
+        <span class="key">send_resolved:</span> <span class="val">true</span>
+        <span class="key">title:</span> <span class="string">'🔴 ALERT: {{ .CommonLabels.alertname }}'</span>
+        <span class="key">text:</span> <span class="string">'*Server:* {{ .CommonLabels.instance }}\n*Issue:* {{ .CommonAnnotations.summary }}'</span>
+    <span class="key">email_configs:</span>
+      - <span class="key">to:</span> <span class="string">'you@gmail.com'</span>
+        <span class="key">headers:</span>
+          <span class="key">Subject:</span> <span class="string">'🚨 ESCALATION: {{ .CommonLabels.alertname }} unresolved after 5 alerts'</span></pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 4</div>
+    <h3>Create alert rules</h3>
+    <div class="code-block">
+      <div class="code-header"><span>/etc/prometheus/rules/alerts.yml</span></div>
+      <pre><span class="key">groups:</span>
+  - <span class="key">name:</span> <span class="val">server-alerts</span>
+    <span class="key">rules:</span>
+      - <span class="key">alert:</span> <span class="val">InstanceDown</span>
+        <span class="key">expr:</span> <span class="string">up == 0</span>
+        <span class="key">for:</span> <span class="val">1m</span>
+        <span class="key">labels:</span>
+          <span class="key">severity:</span> <span class="val">critical</span>
+        <span class="key">annotations:</span>
+          <span class="key">summary:</span> <span class="string">"Server {{ $labels.instance }} is DOWN"</span>
+
+      - <span class="key">alert:</span> <span class="val">HighCPULinux</span>
+        <span class="key">expr:</span> <span class="string">100 - (avg by(instance)(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85</span>
+        <span class="key">for:</span> <span class="val">5m</span>
+        <span class="key">labels:</span>
+          <span class="key">severity:</span> <span class="val">critical</span>
+        <span class="key">annotations:</span>
+          <span class="key">summary:</span> <span class="string">"High CPU on {{ $labels.instance }}: {{ $value }}%"</span>
+
+      - <span class="key">alert:</span> <span class="val">HighCPUWindows</span>
+        <span class="key">expr:</span> <span class="string">100 - (avg by(instance)(rate(windows_cpu_time_total{mode="idle"}[5m])) * 100) > 85</span>
+        <span class="key">for:</span> <span class="val">5m</span>
+        <span class="key">labels:</span>
+          <span class="key">severity:</span> <span class="val">critical</span>
+        <span class="key">annotations:</span>
+          <span class="key">summary:</span> <span class="string">"High CPU on Windows {{ $labels.instance }}: {{ $value }}%"</span>
+
+      - <span class="key">alert:</span> <span class="val">HighMemoryLinux</span>
+        <span class="key">expr:</span> <span class="string">(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 90</span>
+        <span class="key">for:</span> <span class="val">5m</span>
+        <span class="key">labels:</span>
+          <span class="key">severity:</span> <span class="val">critical</span>
+        <span class="key">annotations:</span>
+          <span class="key">summary:</span> <span class="string">"High memory on {{ $labels.instance }}: {{ $value }}%"</span>
+
+      - <span class="key">alert:</span> <span class="val">LowDiskLinux</span>
+        <span class="key">expr:</span> <span class="string">(node_filesystem_free_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 &lt; 10</span>
+        <span class="key">for:</span> <span class="val">5m</span>
+        <span class="key">labels:</span>
+          <span class="key">severity:</span> <span class="val">critical</span>
+        <span class="key">annotations:</span>
+          <span class="key">summary:</span> <span class="string">"Low disk on {{ $labels.instance }}: {{ $value }}% free"</span></pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 5</div>
+    <h3>Start Alertmanager and connect to Prometheus</h3>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre><span class="comment"># Create systemd service</span>
+cat > /etc/systemd/system/alertmanager.service &lt;&lt; 'EOF'
+[Unit]
+Description=Alertmanager
+After=network.target
+[Service]
+User=root
+ExecStart=/usr/local/bin/alertmanager \
+  --config.file=/etc/alertmanager/alertmanager.yml \
+  --storage.path=/var/lib/alertmanager \
+  --web.external-url=http://YOUR_VPS_IP:9093
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable --now alertmanager
+curl http://localhost:9093/-/healthy</pre>
+    </div>
+
+    <p>Update <code>/etc/prometheus/prometheus.yml</code> to add the alerting block, then restart Prometheus:</p>
+    <div class="code-block">
+      <div class="code-header"><span>add to prometheus.yml</span></div>
+      <pre><span class="key">alerting:</span>
+  <span class="key">alertmanagers:</span>
+    - <span class="key">static_configs:</span>
+        - <span class="key">targets:</span> [<span class="string">'localhost:9093'</span>]
+
+<span class="key">rule_files:</span>
+  - <span class="string">/etc/prometheus/rules/*.yml</span></pre>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><span>bash</span></div>
+      <pre>mkdir -p /etc/prometheus/rules
+systemctl restart prometheus</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-label">Step 6</div>
+    <h3>Test the alerts</h3>
+    <div class="code-block">
+      <div class="code-header"><span>bash — stop app to trigger alert</span></div>
+      <pre><span class="comment"># Stop the Flask container — triggers InstanceDown alert</span>
+docker stop devops-app
+
+<span class="comment"># Wait 1 minute — check Slack for alert</span>
+<span class="comment"># Then bring it back up</span>
+docker start devops-app
+
+<span class="comment"># Check Slack for RESOLVED message</span></pre>
+    </div>
+    <p>The escalation timeline:</p>
+    <div class="output-block">
+      <div class="out-label">Alert escalation flow</div>
+      Minute 0  → 🔴 Slack alert #1 (auto)
+      Minute 5  → 🔴 Slack alert #2 (auto repeat)
+      Minute 10 → 🔴 Slack alert #3
+      Minute 15 → 🔴 Slack alert #4
+      Minute 20 → 🔴 Slack alert #5
+      Minute 25 → 🔴 Slack alert #6 + 📧 Email escalation
+      Server up → ✅ RESOLVED in Slack
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <strong>✅ Phase 5 complete — Project done!</strong>
+    You now have a full production-grade DevOps pipeline with automated alerting.
+  </div>
+
+  <div class="phase-tools">
+    <span class="tool-tag">Alertmanager</span>
+    <span class="tool-tag">Slack webhook</span>
+    <span class="tool-tag">Gmail SMTP</span>
+    <span class="tool-tag">Alert rules</span>
+    <span class="tool-tag">Gmail App Password</span>
+  </div>
+</div>
+
+<hr class="section-div">
+
+<!-- ══════════════════════════════════════════════
+     SCREENSHOTS
+══════════════════════════════════════════════ -->
+<div class="phase" id="screenshots">
+  <div class="phase-header">
+    <div class="phase-num teal">✓</div>
+    <div>
+      <div class="phase-title">Screenshots & Results</div>
+      <div class="phase-subtitle">Proof of what was built</div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
+    <div style="background:#1e293b;border:1px solid #334155;border-radius:8px;padding:16px;">
+      <div style="font-size:11px;font-weight:700;color:#0d9488;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">GitHub Actions</div>
+      <img src="../assets/images/devops/github-actions.png" alt="GitHub Actions green pipeline" style="width:100%;border-radius:6px;border:1px solid #334155;" onerror="this.style.display='none'">
+      <p style="font-size:12px;color:#64748b;margin-top:8px;">Green CI/CD pipeline — auto-deploys on every push</p>
+    </div>
+    <div style="background:#1e293b;border:1px solid #334155;border-radius:8px;padding:16px;">
+      <div style="font-size:11px;font-weight:700;color:#0d9488;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Grafana — Linux VPS</div>
+      <img src="../assets/images/devops/grafana-linux.png" alt="Grafana Linux dashboard" style="width:100%;border-radius:6px;border:1px solid #334155;" onerror="this.style.display='none'">
+      <p style="font-size:12px;color:#64748b;margin-top:8px;">Node Exporter Full dashboard — CPU 1.7%, RAM 17.8%</p>
+    </div>
+    <div style="background:#1e293b;border:1px solid #334155;border-radius:8px;padding:16px;">
+      <div style="font-size:11px;font-weight:700;color:#0d9488;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Grafana — Windows VPS</div>
+      <img src="../assets/images/devops/grafana-windows.png" alt="Grafana Windows dashboard" style="width:100%;border-radius:6px;border:1px solid #334155;" onerror="this.style.display='none'">
+      <p style="font-size:12px;color:#64748b;margin-top:8px;">Custom Windows VPS dashboard — CPU, Memory, Disk, Network</p>
+    </div>
+    <div style="background:#1e293b;border:1px solid #334155;border-radius:8px;padding:16px;">
+      <div style="font-size:11px;font-weight:700;color:#0d9488;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Slack Alert</div>
+      <img src="../assets/images/devops/slack-alert.png" alt="Slack alert notification" style="width:100%;border-radius:6px;border:1px solid #334155;" onerror="this.style.display='none'">
+      <p style="font-size:12px;color:#64748b;margin-top:8px;">Alertmanager firing to Slack #alerts channel</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<div style="background:#1e293b;border:1px solid #334155;border-radius:10px;padding:24px 28px;margin-top:16px;">
+  <div style="font-size:13px;font-weight:700;color:#2dd4bf;margin-bottom:12px;">📁 Project Repository</div>
+  <div style="font-size:13px;color:#94a3b8;line-height:2;">
+    <strong style="color:#e2e8f0;">Code + configs:</strong> <a href="https://github.com/ketulpa/devops-pipeline" style="color:#2dd4bf;">github.com/ketulpa/devops-pipeline</a><br>
+    <strong style="color:#e2e8f0;">Documentation:</strong> <a href="https://ketulpa.github.io/infrastructure-kb" style="color:#2dd4bf;">ketulpa.github.io/infrastructure-kb</a><br>
+    <strong style="color:#e2e8f0;">Author:</strong> Ketul Patel — <a href="https://linkedin.com/in/ketulrpatel" style="color:#2dd4bf;">linkedin.com/in/ketulrpatel</a>
+  </div>
+</div>
+
+</div>
